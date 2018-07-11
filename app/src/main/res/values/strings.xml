@@ -6,4 +6,8 @@
     <string name="log_in">Log In</string>
     <string name="conversations">Conversations</string>
     <string name="users">Users</string>
+    <string name="messages">Messages</string>
+    <string name="opponent_name">opponent name</string>
+    <string name="opponent_message">opponent message</string>
+    <string name="EditTextHint">Enter Some Text ..</string>
 </resources>
