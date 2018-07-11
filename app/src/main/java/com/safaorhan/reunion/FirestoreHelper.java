@@ -76,7 +76,7 @@ public class FirestoreHelper {
                                     .addOnFailureListener(new OnFailureListener() {
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
-                                            Log.e(TAG, "onFailute", e);
+                                            Log.e(TAG, "onFailure", e);
                                         }
                                     });
                         } else {
@@ -127,6 +127,9 @@ public class FirestoreHelper {
         return getConversations().document(conversation.getId());
     }
 
+    public static DocumentReference getConversationRefById(String id){
+        return getConversations().document(id);
+    }
     public static DocumentReference getUserRef(User user) {
         return getUsers().document(user.getId());
     }
@@ -135,7 +138,7 @@ public class FirestoreHelper {
         void onCompleted(DocumentReference documentReference);
     }
 
-    public static String getConversationId(DocumentReference opponentRef) {
+    private static String getConversationId(DocumentReference opponentRef) {
         String myId = getMe().getId();
         String opponentId = opponentRef.getId();
 

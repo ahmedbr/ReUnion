@@ -27,16 +27,16 @@ import com.safaorhan.reunion.model.Conversation;
 import com.safaorhan.reunion.model.Message;
 import com.safaorhan.reunion.model.User;
 
-public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, ConversationAdapter.ConversationHolder> {
+public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation,
+        ConversationAdapter.ConversationHolder> {
     private static final String TAG = ConversationAdapter.class.getSimpleName();
-    ConversationClickListener conversationClickListener;
+    private ConversationClickListener conversationClickListener;
 
-
-    public ConversationAdapter(@NonNull FirestoreRecyclerOptions<Conversation> options) {
+    private ConversationAdapter(@NonNull FirestoreRecyclerOptions<Conversation> options) {
         super(options);
     }
 
-    public ConversationClickListener getConversationClickListener() {
+    private ConversationClickListener getConversationClickListener() {
         if (conversationClickListener == null) {
             conversationClickListener = new ConversationClickListener() {
                 @Override
@@ -78,11 +78,12 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
     @NonNull
     @Override
     public ConversationHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_conversation, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_conversation,
+                parent, false);
         return new ConversationHolder(itemView);
     }
 
-    public class ConversationHolder extends RecyclerView.ViewHolder {
+    class ConversationHolder extends RecyclerView.ViewHolder {
 
         View itemView;
         TextView opponentNameText;
@@ -90,17 +91,16 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
         ImageView conversationImage;
         Context context;
 
-        public ConversationHolder(View itemView) {
+        ConversationHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
             context = itemView.getContext();
             opponentNameText = itemView.findViewById(R.id.opponentNameText);
             lastMessageText = itemView.findViewById(R.id.lastMessageText);
             conversationImage = itemView.findViewById(R.id.conversation_image);
-
         }
 
-        public void bind(final Conversation conversation) {
+        void bind(final Conversation conversation) {
 
             itemView.setVisibility(View.INVISIBLE);
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -108,8 +108,6 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation, 
                 public void onClick(View v) {
                     getConversationClickListener()
                             .onConversationClick(FirestoreHelper.getConversationRef(conversation));
-                    Intent intent = new Intent(context, MessageActivity.class);
-                    context.startActivity(intent);
                 }
             });
 
