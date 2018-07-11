@@ -23,16 +23,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="ahmed" />
+            android:text="@string/opponent_name" />
 
         <TextView
             android:id="@+id/emailText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="breem" />
+            android:text="@string/email" />
 
     </LinearLayout>
-
-
 </LinearLayout>

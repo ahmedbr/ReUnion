@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="?android:attr/selectableItemBackground"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="12dp">
 
     <ImageView
         android:id="@+id/conversation_image"
@@ -15,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_24"
+        android:layout_marginStart="@dimen/dp_24"
         android:orientation="vertical">
 
         <TextView
@@ -22,14 +23,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="opponent name" />
+            android:text="@string/opponent_name" />
 
         <TextView
             android:id="@+id/lastMessageText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="opponent message" />
+            android:text="@string/opponent_message" />
 
     </LinearLayout>
 </LinearLayout>

@@ -26,7 +26,9 @@
         <activity
             android:name=".activity.UsersActivity"
             android:label="@string/users" />
-        <activity android:name=".activity.MessageActivity"></activity>
+        <activity
+            android:name=".activity.MessageActivity"
+            android:label="@string/messages" />
     </application>
 
 </manifest>

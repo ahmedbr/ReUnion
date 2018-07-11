@@ -8,42 +8,38 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/message_Recycle_View"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/turquoise_blue"
-        android:layout_alignParentTop="true" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/send_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/send_fab_white_15_13" />
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:background="@color/turquoise_blue" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/send_fab"
-        android:layout_toStartOf="@+id/send_fab"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp">
+        android:background="@android:color/white"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/dp_12"
+        android:paddingTop="@dimen/dp_12">
 
         <EditText
             android:id="@+id/message_Edit_Text"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="17dp"
-            android:layout_marginStart="17dp"
-            android:text="this is edit text" />
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_weight="0.85"
+            android:hint="@string/EditTextHint"
+            android:inputType="text" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/send_fab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dp_12"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_12"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_weight="0.15"
+            android:src="@drawable/send_fab_white_15_13" />
     </LinearLayout>
-
-
 </RelativeLayout>
