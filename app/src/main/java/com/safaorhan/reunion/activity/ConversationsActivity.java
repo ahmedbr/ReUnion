@@ -50,6 +50,9 @@ public class ConversationsActivity extends AppCompatActivity implements
     @Override
     public void onConversationClick(DocumentReference conversationRef) {
         String id = conversationRef.getId();
+        Intent intent = new Intent(this, MessageActivity.class);
+        intent.putExtra("conversation_id", id);
+        startActivity(intent);
     }
 
     @Override
