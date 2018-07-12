@@ -1,5 +1,6 @@
 package com.safaorhan.reunion.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.safaorhan.reunion.FirestoreHelper;
 import com.safaorhan.reunion.R;
 import com.safaorhan.reunion.adapter.UserAdapter;
+import com.safaorhan.reunion.model.User;
 
 public class UsersActivity extends AppCompatActivity implements UserAdapter.UserClickListener {
 
@@ -50,8 +52,15 @@ public class UsersActivity extends AppCompatActivity implements UserAdapter.User
         FirestoreHelper.findOrCreateConversation(userRef, new FirestoreHelper.DocumentReferenceCallback() {
             @Override
             public void onCompleted(DocumentReference documentReference) {
-                finish();
+                String id = documentReference.getId();
+                Intent intent = new Intent(UsersActivity.this, MessageActivity.class);
+                intent.putExtra("conversation_id", id);
+                startActivity(intent);
             }
         });
     }
+
+
+
+
 }

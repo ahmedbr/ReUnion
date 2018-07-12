@@ -114,18 +114,27 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation,
             conversation.getOpponent().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    User opponent = documentSnapshot.toObject(User.class);
-                    String opponentName = opponent.getName();
-                    opponentNameText.setText(opponentName);
-                    String firstChar = String.valueOf(opponent.getName().charAt(0));
+                    try {
+                        User opponent = documentSnapshot.toObject(User.class);
 
-                    // using the text drawable
-                    ColorGenerator generator = ColorGenerator.MATERIAL;
-                    int color = generator.getColor(opponent.getEmail());
-                    TextDrawable drawable = TextDrawable.builder()
-                            .buildRound(firstChar, color);
-                    conversationImage.setImageDrawable(drawable);
+                        String opponentName = opponent.getName();
+                        try {
+                            opponentNameText.setText(opponentName);
+                        }
+                        catch (Exception e){
 
+                        }
+                        String firstChar = String.valueOf(opponent.getName().charAt(0));
+
+                        // using the text drawable
+                        ColorGenerator generator = ColorGenerator.MATERIAL;
+                        int color = generator.getColor(opponent.getEmail());
+                        TextDrawable drawable = TextDrawable.builder()
+                                .buildRound(firstChar, color);
+                        conversationImage.setImageDrawable(drawable);
+                    } catch (Exception e) {
+
+                    }
                     itemView.setVisibility(View.VISIBLE);
                 }
             });
