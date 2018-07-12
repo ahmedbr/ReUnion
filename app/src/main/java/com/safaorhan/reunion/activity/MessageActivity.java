@@ -1,29 +1,26 @@
 package com.safaorhan.reunion.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.google.firebase.firestore.DocumentReference;
 import com.safaorhan.reunion.FirestoreHelper;
 import com.safaorhan.reunion.R;
-import com.safaorhan.reunion.adapter.ConversationAdapter;
 import com.safaorhan.reunion.adapter.MessageAdapter;
-import com.safaorhan.reunion.model.Message;
 
 public class MessageActivity extends AppCompatActivity {
     RecyclerView messageRecycleView;
-    EditText messageEditeText;
+    EditText messageEditText;
     MessageAdapter messageAdapter;
     DocumentReference documentReference;
+
+    static boolean active = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +30,16 @@ public class MessageActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String conversationId = intent.getStringExtra("conversation_id");
 
-        messageEditeText = findViewById(R.id.message_Edit_Text);
+        messageEditText = findViewById(R.id.message_Edit_Text);
         messageRecycleView = findViewById(R.id.message_Recycle_View);
 
-        documentReference = FirestoreHelper.getConversationRefById(conversationId);
-        messageAdapter = MessageAdapter.get(documentReference);
+        try {
+            documentReference = FirestoreHelper.getConversationRefById(conversationId);
+            messageAdapter = MessageAdapter.get(documentReference);
+        } catch (Exception e) {
+
+        }
+
 
         messageRecycleView.setLayoutManager(new LinearLayoutManager(this));
         messageRecycleView.setAdapter(messageAdapter);
@@ -46,13 +48,11 @@ public class MessageActivity extends AppCompatActivity {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String message = messageEditeText.getText().toString().trim();
-                if(!message.equals("")){
+                String message = messageEditText.getText().toString().trim();
+                if (!message.equals("")) {
                     FirestoreHelper.sendMessage(message, documentReference);
-                    finish();
-                    startActivity(getIntent());
                 }
-                messageEditeText.setText("");
+                messageEditText.setText("");
             }
         });
 
@@ -62,11 +62,13 @@ public class MessageActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         messageAdapter.startListening();
+        active = true;
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        active = false;
         messageAdapter.stopListening();
     }
 }

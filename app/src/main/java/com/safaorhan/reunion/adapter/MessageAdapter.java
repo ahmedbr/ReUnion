@@ -30,8 +30,7 @@ public class MessageAdapter extends FirestoreRecyclerAdapter<Message, MessageAda
         Query query = FirebaseFirestore.getInstance()
                 .collection("messages")
                 .orderBy("sentAt")
-                .whereEqualTo("conversation", conversationRef)
-                .limit(50);
+                .whereEqualTo("conversation", conversationRef);
 
         FirestoreRecyclerOptions<Message> options = new FirestoreRecyclerOptions.Builder<Message>()
                 .setQuery(query, Message.class)
@@ -71,10 +70,7 @@ public class MessageAdapter extends FirestoreRecyclerAdapter<Message, MessageAda
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     User user = documentSnapshot.toObject(User.class);
                     String username = user.getName();
-                    senderTextView.setText(user.getName());
-                    if (!username.equals("Ahmed")) {
-                        senderTextView.setTextColor(Color.RED);
-                    }
+                    senderTextView.setText(username);
                 }
             });
             messageTextView.setText(message.getText());
