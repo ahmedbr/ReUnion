@@ -65,15 +65,26 @@ public class MessageAdapter extends FirestoreRecyclerAdapter<Message, MessageAda
         }
 
         void bind(Message message) {
+            senderTextView.setVisibility(View.INVISIBLE);
+            messageTextView.setVisibility(View.INVISIBLE);
             message.getFrom().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     User user = documentSnapshot.toObject(User.class);
                     String username = user.getName();
                     senderTextView.setText(username);
+
+                    if(!username.equals("Ahmed")){
+                        senderTextView.setTextColor(Color.RED);
+                    }
+                    else
+                        senderTextView.setTextColor(Color.BLACK);
                 }
             });
+            senderTextView.setVisibility(View.VISIBLE);
             messageTextView.setText(message.getText());
+            messageTextView.setVisibility(View.VISIBLE);
+
         }
     }
 }
