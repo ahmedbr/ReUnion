@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/turquoise_blue"
+    android:background="@color/colorPrimary"
     tools:context=".activity.LoginActivity">
 
     <LinearLayout
@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_23"
-            android:backgroundTint="@color/orange_color"
+            android:backgroundTint="@color/colorAccent"
             android:hint="@string/email" />
 
         <EditText
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/dp_24"
-            android:backgroundTint="@color/orange_color"
+            android:backgroundTint="@color/colorAccent"
             android:hint="@string/password"
             android:inputType="textPassword" />
 
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/orange_color"
+            android:background="@color/colorAccent"
             android:text="@string/log_in" />
 
     </LinearLayout>

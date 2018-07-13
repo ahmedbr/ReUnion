@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
 
 import com.google.firebase.firestore.DocumentReference;
 import com.safaorhan.reunion.FirestoreHelper;
@@ -19,7 +21,7 @@ public class MessageActivity extends AppCompatActivity {
     EditText messageEditText;
     MessageAdapter messageAdapter;
     DocumentReference documentReference;
-
+    LinearLayoutManager layoutManager;
     static boolean active = false;
 
     @Override
@@ -40,9 +42,19 @@ public class MessageActivity extends AppCompatActivity {
 
         }
 
-
-        messageRecycleView.setLayoutManager(new LinearLayoutManager(this));
+        layoutManager = new LinearLayoutManager(this);
+        layoutManager.setSmoothScrollbarEnabled(true);
+        layoutManager.setStackFromEnd(true);
+        messageRecycleView.setHasFixedSize(true);
+        messageRecycleView.setLayoutManager(layoutManager);
+        messageAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onItemRangeInserted(int positionStart, int itemCount) {
+                layoutManager.smoothScrollToPosition(messageRecycleView,null,messageAdapter.getItemCount());
+            }
+        });
         messageRecycleView.setAdapter(messageAdapter);
+
 
         FloatingActionButton floatingActionButton = findViewById(R.id.send_fab);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -57,6 +69,8 @@ public class MessageActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     @Override
     protected void onStart() {
