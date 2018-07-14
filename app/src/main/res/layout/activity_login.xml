@@ -25,7 +25,12 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dp_23"
             android:backgroundTint="@color/colorAccent"
-            android:hint="@string/email" />
+            android:hint="@string/email"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/hintColor" />
 
         <EditText
             android:id="@+id/passwordEdit"
@@ -35,15 +40,22 @@
             android:layout_marginBottom="@dimen/dp_24"
             android:backgroundTint="@color/colorAccent"
             android:hint="@string/password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:lines="1"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/hintColor" />
 
         <Button
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/colorAccent"
-            android:text="@string/log_in" />
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/log_in"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white" />
 
     </LinearLayout>
 </RelativeLayout>

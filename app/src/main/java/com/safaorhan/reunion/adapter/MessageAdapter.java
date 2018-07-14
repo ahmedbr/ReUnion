@@ -73,12 +73,6 @@ public class MessageAdapter extends FirestoreRecyclerAdapter<Message, MessageAda
                     User user = documentSnapshot.toObject(User.class);
                     String username = user.getName();
                     senderTextView.setText(username);
-
-                    if(!username.equals("Ahmed")){
-                        senderTextView.setTextColor(Color.RED);
-                    }
-                    else
-                        senderTextView.setTextColor(Color.BLACK);
                 }
             });
             senderTextView.setVisibility(View.VISIBLE);
