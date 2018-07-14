@@ -28,7 +28,7 @@ public class MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
-        setTitle("Chat with : " + getIntent().getStringExtra("name"));
+        setTitle("Chat with " + getIntent().getStringExtra("name"));
         Intent intent = getIntent();
         String conversationId = intent.getStringExtra("conversation_id");
 
