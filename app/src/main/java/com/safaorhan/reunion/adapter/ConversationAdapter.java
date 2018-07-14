@@ -40,7 +40,7 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation,
         if (conversationClickListener == null) {
             conversationClickListener = new ConversationClickListener() {
                 @Override
-                public void onConversationClick(DocumentReference documentReference) {
+                public void onConversationClick(DocumentReference documentReference,String name) {
                     Log.e(TAG, "You need to call setConversationClickListener()" +
                             " to set the click listener of ConversationAdapter");
                 }
@@ -100,14 +100,23 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation,
             conversationImage = itemView.findViewById(R.id.conversation_image);
         }
 
+
         void bind(final Conversation conversation) {
+            String opponentName;
+            final User[] opponent = new User[1];
 
             itemView.setVisibility(View.INVISIBLE);
+            conversation.getOpponent().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    opponent[0] = documentSnapshot.toObject(User.class);
+                }
+            });
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     getConversationClickListener()
-                            .onConversationClick(FirestoreHelper.getConversationRef(conversation));
+                            .onConversationClick(FirestoreHelper.getConversationRef(conversation), opponent[0].getName());
                 }
             });
 
@@ -120,8 +129,7 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation,
                         String opponentName = opponent.getName();
                         try {
                             opponentNameText.setText(opponentName);
-                        }
-                        catch (Exception e){
+                        } catch (Exception e) {
 
                         }
                         String firstChar = String.valueOf(opponent.getName().charAt(0));
@@ -156,6 +164,6 @@ public class ConversationAdapter extends FirestoreRecyclerAdapter<Conversation,
     }
 
     public interface ConversationClickListener {
-        void onConversationClick(DocumentReference conversationRef);
+        void onConversationClick(DocumentReference conversationRef, String userName);
     }
 }

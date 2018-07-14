@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -29,6 +28,7 @@ public class MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
+        setTitle("Chat with : " + getIntent().getStringExtra("name"));
         Intent intent = getIntent();
         String conversationId = intent.getStringExtra("conversation_id");
 
@@ -50,11 +50,10 @@ public class MessageActivity extends AppCompatActivity {
         messageAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
-                layoutManager.smoothScrollToPosition(messageRecycleView,null,messageAdapter.getItemCount());
+                layoutManager.smoothScrollToPosition(messageRecycleView, null, messageAdapter.getItemCount());
             }
         });
         messageRecycleView.setAdapter(messageAdapter);
-
 
         FloatingActionButton floatingActionButton = findViewById(R.id.send_fab);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {

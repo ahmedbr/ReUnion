@@ -34,7 +34,7 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
         if (userClickListener == null) {
             userClickListener = new UserClickListener() {
                 @Override
-                public void onUserClick(DocumentReference userRef) {
+                public void onUserClick(DocumentReference userRef, String userName) {
                     Log.e(TAG, "You need to call setUserClickListener() to set the click listener of UserAdapter");
                 }
             };
@@ -88,7 +88,9 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
             userImage = itemView.findViewById(R.id.user_image);
         }
 
+        String userName;
         public void bind(final User user) {
+            userName = user.getName();
             nameText.setText(user.getName() + " " + user.getSurname());
             emailText.setText(user.getEmail());
 
@@ -98,7 +100,7 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        getUserClickListener().onUserClick(FirestoreHelper.getUserRef(user));
+                        getUserClickListener().onUserClick(FirestoreHelper.getUserRef(user), userName);
                     }
                 });
             }
@@ -115,6 +117,6 @@ public class UserAdapter extends FirestoreRecyclerAdapter<User, UserAdapter.User
     }
 
     public interface UserClickListener {
-        void onUserClick(DocumentReference userRef);
+        void onUserClick(DocumentReference userRef, String userName);
     }
 }
