@@ -70,8 +70,6 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
-
-
     @Override
     protected void onStart() {
         super.onStart();
