@@ -29,10 +29,9 @@
             android:label="@string/conversations" />
         <activity
             android:name=".activity.UsersActivity"
-            android:label="@string/users" />
+            android:label="@string/people" />
         <activity
             android:name=".activity.MessageActivity"
-            android:label="@string/messages"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden|adjustResize" />
     </application>

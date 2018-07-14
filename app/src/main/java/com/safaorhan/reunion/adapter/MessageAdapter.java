@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -57,28 +58,25 @@ public class MessageAdapter extends FirestoreRecyclerAdapter<Message, MessageAda
 
         TextView senderTextView;
         TextView messageTextView;
+        CardView cardView;
 
         MessageHolder(View itemView) {
             super(itemView);
             senderTextView = itemView.findViewById(R.id.sender_Text_View);
             messageTextView = itemView.findViewById(R.id.message_Text_View);
+            cardView = itemView.findViewById(R.id.card_view);
         }
 
         void bind(Message message) {
-            senderTextView.setVisibility(View.INVISIBLE);
-            messageTextView.setVisibility(View.INVISIBLE);
-            message.getFrom().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot documentSnapshot) {
-                    User user = documentSnapshot.toObject(User.class);
-                    String username = user.getName();
-                    senderTextView.setText(username);
-                }
-            });
-            senderTextView.setVisibility(View.VISIBLE);
-            messageTextView.setText(message.getText());
-            messageTextView.setVisibility(View.VISIBLE);
-
+                message.getFrom().get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        User user = documentSnapshot.toObject(User.class);
+                        String username = user.getName();
+                        senderTextView.setText(username);
+                    }
+                });
+                messageTextView.setText(message.getText());
         }
     }
 }

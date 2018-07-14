@@ -10,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.google.firebase.firestore.DocumentReference;
+import com.safaorhan.reunion.FirestoreHelper;
 import com.safaorhan.reunion.R;
 import com.safaorhan.reunion.adapter.ConversationAdapter;
 
@@ -48,9 +49,11 @@ public class ConversationsActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onConversationClick(DocumentReference conversationRef) {
+    public void onConversationClick(DocumentReference conversationRef, String name) {
         String id = conversationRef.getId();
+        String userName = name;
         Intent intent = new Intent(this, MessageActivity.class);
+        intent.putExtra("name", name);
         intent.putExtra("conversation_id", id);
         startActivity(intent);
     }
@@ -61,6 +64,7 @@ public class ConversationsActivity extends AppCompatActivity implements
         inflater.inflate(R.menu.conversations, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
